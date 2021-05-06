@@ -1,12 +1,12 @@
 import React from "react"
 import Layout from "../components/layout"
 
-const Index = () => {
+const Skills = () => {
   return (
     <Layout>
-      <p>hi from index</p>
+      <p>hi from skills</p>
     </Layout>
   )
 }
 
-export default Index
+export default Skills
