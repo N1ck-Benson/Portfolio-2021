@@ -145,9 +145,10 @@ const Layout = ({ children }) => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap>
-            Nick Benson
-          </Typography>
+          <span>
+            <p style={{ margin: "5px 0 0 0" }}>nick benson</p>
+            <Typography variant="h6">Fullstack Developer</Typography>
+          </span>
         </Toolbar>
       </AppBar>
       <ResponsiveDrawer
