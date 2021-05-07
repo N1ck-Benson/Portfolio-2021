@@ -1,15 +1,4 @@
-/*
-const Layout = ({ children }) => {
-  return (
-    
-  )
-}
-
-export default Layout
-*/
-
 import React from "react"
-import PropTypes from "prop-types"
 import AppBar from "@material-ui/core/AppBar"
 import CssBaseline from "@material-ui/core/CssBaseline"
 import Divider from "@material-ui/core/Divider"
@@ -62,15 +51,10 @@ const useStyles = makeStyles(theme => ({
 // ResponsiveDrawer uses two React <Hidden/> components
 // The first shows a 'temporary' drawer for small screens
 // The second shows a 'permanent' drawer for wide screens
-function ResponsiveDrawer(props) {
-  const { window } = props
+const ResponsiveDrawer = props => {
+  const { window, mobileOpen, handleDrawerToggle } = props
   const classes = useStyles()
-  const theme = useTheme()
-  const [mobileOpen, setMobileOpen] = React.useState(false)
-
-  const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen)
-  }
+  // const theme = useTheme()
 
   // Contents of the drawer side-menu...
   const drawer = (
@@ -101,24 +85,7 @@ function ResponsiveDrawer(props) {
   // Structure of the drawer side-menu...
   // The CssBaseline establishes some basic styling, including page margins and layout
   return (
-    <div className={classes.root}>
-      <CssBaseline />
-      <AppBar position="fixed" className={classes.appBar}>
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            className={classes.menuButton}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap>
-            Nick Benson
-          </Typography>
-        </Toolbar>
-      </AppBar>
+    <div>
       <nav className={classes.drawer} aria-label="Site navigation">
         {/* The implementation of <Hidden> can be changed to js to avoid SEO duplication of links. */}
         {/* smUp -> temporary drawer and icon are hidden at or above 'small' screen-size */}
@@ -152,19 +119,48 @@ function ResponsiveDrawer(props) {
           </Drawer>
         </Hidden>
       </nav>
+    </div>
+  )
+}
+
+const Layout = ({ children }) => {
+  const classes = useStyles()
+  const [mobileOpen, setMobileOpen] = React.useState(false)
+
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen)
+  }
+
+  return (
+    <div className={classes.root}>
+      <CssBaseline />
+      <AppBar position="fixed" className={classes.appBar}>
+        <Toolbar>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            edge="start"
+            onClick={handleDrawerToggle}
+            className={classes.menuButton}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" noWrap>
+            Nick Benson
+          </Typography>
+        </Toolbar>
+      </AppBar>
+      <ResponsiveDrawer
+        mobileOpen={mobileOpen}
+        handleDrawerToggle={handleDrawerToggle}
+      />
       <main className={classes.content}>
         {/* A div creates space above the main text for the fixed toolbar */}
         <div className={classes.toolbar} />
-        <Typography paragraph>
-          Bio goes here... Aliqua cillum occaecat veniam mollit eu. Exercitation
-          nisi fugiat laborum mollit id nostrud velit adipisicing nisi officia
-          Lorem reprehenderit ipsum. Ea nulla officia duis ex aliqua aliqua
-          minim. Aliqua aliqua in id Lorem est enim anim fugiat fugiat. Velit
-          adipisicing sit Lorem non.
-        </Typography>
+        {children}
       </main>
     </div>
   )
 }
 
-export default ResponsiveDrawer
+export default Layout
