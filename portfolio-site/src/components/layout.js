@@ -1,33 +1,170 @@
-import React from "react"
-import AppBar from "@material-ui/core/AppBar"
-import Container from "@material-ui/core/Container"
-import "@fontsource/nunito"
-import Toolbar from "@material-ui/core/Toolbar"
-
-// Styles need to be globalised...
-// Currently trying to use global.css, imported in gatsby-browser.js to make it global (but this isn't working)
-// Alternative is to use material-ui's context-esque ThemeProvider
-
-// For side-menu/drawer, use docs here: https://material-ui.com/components/drawers/#temporary-drawer
-
+/*
 const Layout = ({ children }) => {
   return (
-    <Container>
-      <AppBar
-        position="fixed"
-        style={{
-          background: "#31334c",
-          color: "#e78e31",
-          fontFamily: "nunito, sans-serif",
-        }}
-      >
-        <Toolbar>
-          <h4>nick benson</h4>
-        </Toolbar>
-      </AppBar>
-      <div style={{ paddingTop: "70px" }}>{children}</div>
-    </Container>
+    
   )
 }
 
 export default Layout
+*/
+
+import React from "react"
+import PropTypes from "prop-types"
+import AppBar from "@material-ui/core/AppBar"
+import CssBaseline from "@material-ui/core/CssBaseline"
+import Divider from "@material-ui/core/Divider"
+import Drawer from "@material-ui/core/Drawer"
+import Hidden from "@material-ui/core/Hidden"
+import IconButton from "@material-ui/core/IconButton"
+import List from "@material-ui/core/List"
+import ListItem from "@material-ui/core/ListItem"
+import ListItemText from "@material-ui/core/ListItemText"
+import MenuIcon from "@material-ui/icons/Menu"
+import Toolbar from "@material-ui/core/Toolbar"
+import Typography from "@material-ui/core/Typography"
+import { makeStyles, useTheme } from "@material-ui/core/styles"
+
+const drawerWidth = 240
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    display: "flex",
+  },
+  drawer: {
+    [theme.breakpoints.up("sm")]: {
+      width: drawerWidth,
+      flexShrink: 0,
+    },
+  },
+  appBar: {
+    [theme.breakpoints.up("sm")]: {
+      width: `calc(100% - ${drawerWidth}px)`,
+      marginLeft: drawerWidth,
+    },
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+    [theme.breakpoints.up("sm")]: {
+      display: "none",
+    },
+  },
+  // necessary for content to be below app bar
+  toolbar: theme.mixins.toolbar,
+  drawerPaper: {
+    width: drawerWidth,
+  },
+  content: {
+    flexGrow: 1,
+    padding: theme.spacing(3),
+  },
+}))
+
+// ResponsiveDrawer uses two React <Hidden/> components
+// The first shows a 'temporary' drawer for small screens
+// The second shows a 'permanent' drawer for wide screens
+function ResponsiveDrawer(props) {
+  const { window } = props
+  const classes = useStyles()
+  const theme = useTheme()
+  const [mobileOpen, setMobileOpen] = React.useState(false)
+
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen)
+  }
+
+  // Contents of the drawer side-menu...
+  const drawer = (
+    <div>
+      <div className={classes.toolbar} />
+      <Divider />
+      <List>
+        {["Portfolio", "About", "Skills"].map((text, index) => (
+          <ListItem button key={text}>
+            <ListItemText primary={text} />
+          </ListItem>
+        ))}
+      </List>
+      <Divider />
+      <List>
+        {["GitHub", "LinkedIn"].map((text, index) => (
+          <ListItem button key={text}>
+            <ListItemText primary={text} />
+          </ListItem>
+        ))}
+      </List>
+    </div>
+  )
+
+  const container =
+    window !== undefined ? () => window().document.body : undefined
+
+  // Structure of the drawer side-menu...
+  // The CssBaseline establishes some basic styling, including page margins and layout
+  return (
+    <div className={classes.root}>
+      <CssBaseline />
+      <AppBar position="fixed" className={classes.appBar}>
+        <Toolbar>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            edge="start"
+            onClick={handleDrawerToggle}
+            className={classes.menuButton}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" noWrap>
+            Nick Benson
+          </Typography>
+        </Toolbar>
+      </AppBar>
+      <nav className={classes.drawer} aria-label="Site navigation">
+        {/* The implementation of <Hidden> can be changed to js to avoid SEO duplication of links. */}
+        {/* smUp -> temporary drawer and icon are hidden at or above 'small' screen-size */}
+        <Hidden smUp implementation="css">
+          <Drawer
+            container={container}
+            variant="temporary"
+            anchor="left"
+            open={mobileOpen}
+            onClose={handleDrawerToggle}
+            classes={{
+              paper: classes.drawerPaper,
+            }}
+            ModalProps={{
+              keepMounted: true, // Better open performance on mobile.
+            }}
+          >
+            {drawer}
+          </Drawer>
+        </Hidden>
+        {/* xsDown -> permanent drawer is hidden at or below 'xsmall' screen size */}
+        <Hidden xsDown implementation="css">
+          <Drawer
+            classes={{
+              paper: classes.drawerPaper,
+            }}
+            variant="permanent"
+            open
+          >
+            {drawer}
+          </Drawer>
+        </Hidden>
+      </nav>
+      <main className={classes.content}>
+        {/* A div creates space above the main text for the fixed toolbar */}
+        <div className={classes.toolbar} />
+        <Typography paragraph>
+          Bio goes here... Aliqua cillum occaecat veniam mollit eu. Exercitation
+          nisi fugiat laborum mollit id nostrud velit adipisicing nisi officia
+          Lorem reprehenderit ipsum. Ea nulla officia duis ex aliqua aliqua
+          minim. Aliqua aliqua in id Lorem est enim anim fugiat fugiat. Velit
+          adipisicing sit Lorem non.
+        </Typography>
+      </main>
+    </div>
+  )
+}
+
+export default ResponsiveDrawer
