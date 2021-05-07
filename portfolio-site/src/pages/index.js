@@ -1,58 +1,78 @@
 import React from "react"
 import Layout from "../components/layout"
 import {
-  Paper,
   Avatar,
+  Divider,
   IconButton,
   Card,
+  CardActionArea,
   CardHeader,
-  CardMedia,
   CardContent,
   CardActions,
   Typography,
 } from "@material-ui/core"
-import FavoriteIcon from "@material-ui/icons/Favorite"
-import ShareIcon from "@material-ui/icons/Share"
+import GitHubIcon from "@material-ui/icons/GitHub"
+import LaunchIcon from "@material-ui/icons/Launch"
 import { makeStyles } from "@material-ui/core/styles"
 
 const useStyles = makeStyles(theme => ({
+  bio: {
+    display: "flex",
+    "margin-top": 0,
+  },
+  avatar: {
+    margin: "0 15px 15px 0",
+  },
   root: {
     maxWidth: 345,
+    margin: "20px 0 20px 0",
   },
   media: {
-    height: 0,
+    height: "50vh",
     paddingTop: "56.25%", // 16:9
+  },
+  cardHeader: {
+    "padding-bottom": 0,
+  },
+  cardActions: {
+    padding: 0,
+  },
+  cardContent: {
+    "padding-bottom": "5px",
   },
 }))
 
 const projectsList = [
   {
-    stack: "F",
-    title: "NC News",
-    body: "here's a quick description",
+    stack: "B",
+    title: "NC News API",
+    body:
+      "My first fully-functioning backend project! An API serving news articles with nine useful endpoints. Soon to be expanded on frontend... Working in Node.js, Express, PSQL & Knex",
     links: {
-      gitHub: "...",
-      site: "...",
+      gitHub: "https://github.com/N1ck-Benson/be-nc-news",
+      site: "https://nc-news-database.herokuapp.com/api",
     },
-    imageUrl: "../images/code-sample-1.webp",
+    imageUrl: "../images/code-sample-1.png",
   },
   {
-    stack: "FS",
-    title: "portfolio",
-    body: "here's another quick description",
+    stack: "F",
+    title: "Blurble",
+    body:
+      "I worked in a team on this platform for hosting book clubs, using React Native. Blurble lets book clubs read together virtually, and lets readers build communities around books they love.",
     links: {
-      gitHub: "...",
+      gitHub: "https://github.com/N1ck-Benson/Blurble",
       site: "...",
     },
     imageUrl: "../images/code-sample-2.webp",
   },
   {
-    stack: "B",
-    title: "Blurble",
-    body: "here's one last quick description",
+    stack: "F",
+    title: "Portfolio Site",
+    body:
+      "My portfolio is a space where I'm trying out tech like Gatsby, graphQL and Material-UI. See my progress on GitHub and in the Journal section below.",
     links: {
-      gitHub: "...",
-      site: "...",
+      gitHub: "https://github.com/N1ck-Benson/portfolio",
+      site: "",
     },
     imageUrl: "../images/code-sample-3.webp",
   },
@@ -62,41 +82,46 @@ const Index = () => {
   const classes = useStyles()
   return (
     <Layout>
-      <Paper variant="outlined">
-        <Typography variant="body1">
-          Hi! I recently graduated from the full-stack developer bootcamp at
-          Northcoders, and am actively seeking new opportunities. I’m working
-          mainly in Node.js, but primed to add new tech to my toolbelt and
-          develop skills on both front- and back-end.
-        </Typography>
-      </Paper>
+      <div className={classes.bio}>
+        <Avatar
+          className={classes.avatar}
+          src="../images/portfolioPic.png"
+          name="profile-pic"
+          alt="Nick"
+        />
+        <p className={classes.bio}>
+          Hi! I recently graduated from the fullstack developer bootcamp at
+          Northcoders. Here you can find some of the projects that are keeping
+          me busy.
+        </p>
+      </div>
+      <Divider />
+      <Typography variant="h6">Projects</Typography>
       {projectsList.map(({ stack, title, body, links, imageUrl }) => {
         return (
           <Card className={classes.root}>
-            <CardHeader
-              avatar={
-                <Avatar aria-label="stack avatar" className={classes.avatar}>
-                  {stack}
-                </Avatar>
-              }
-              title={title}
-            />
-            <CardMedia
-              className={classes.media}
-              image={imageUrl}
-              title={title}
-            />
-            <CardContent>
-              <Typography variant="body2" color="textSecondary" component="p">
-                {body}
-              </Typography>
-            </CardContent>
-            <CardActions disableSpacing>
+            <CardActionArea>
+              <CardHeader
+                className={classes.cardHeader}
+                avatar={
+                  <Avatar aria-label="stack avatar" className={classes.avatar}>
+                    {stack}
+                  </Avatar>
+                }
+                title={title}
+              />
+              <CardContent className={classes.cardContent}>
+                <Typography variant="body2" color="textSecondary" component="p">
+                  {body}
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+            <CardActions className={classes.cardActions} disableSpacing>
               <IconButton aria-label="Site">
-                <FavoriteIcon />
+                <LaunchIcon />
               </IconButton>
               <IconButton aria-label="GitHub">
-                <ShareIcon />
+                <GitHubIcon />
               </IconButton>
             </CardActions>
           </Card>

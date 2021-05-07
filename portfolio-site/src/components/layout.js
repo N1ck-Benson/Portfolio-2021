@@ -61,7 +61,7 @@ const ResponsiveDrawer = props => {
   // Contents of the drawer side-menu...
   const drawer = (
     <div>
-      <div className={classes.toolbar} />
+      <Typography variant="h6">Navigate</Typography>
       <Divider />
       <List>
         {["Portfolio", "About", "Skills"].map((text, index) => (
