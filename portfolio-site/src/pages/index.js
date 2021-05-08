@@ -9,6 +9,7 @@ import {
   CardHeader,
   CardContent,
   CardActions,
+  Grid,
   Typography,
 } from "@material-ui/core"
 import GitHubIcon from "@material-ui/icons/GitHub"
@@ -78,7 +79,7 @@ const projectsList = [
   },
 ]
 
-const Index = () => {
+const Home = () => {
   const classes = useStyles()
   return (
     <Layout>
@@ -96,39 +97,50 @@ const Index = () => {
         </p>
       </div>
       <Divider />
-      <Typography variant="h6">Projects</Typography>
-      {projectsList.map(({ stack, title, body, links, imageUrl }) => {
-        return (
-          <Card className={classes.root}>
-            <CardActionArea>
-              <CardHeader
-                className={classes.cardHeader}
-                avatar={
-                  <Avatar aria-label="stack avatar" className={classes.avatar}>
-                    {stack}
-                  </Avatar>
-                }
-                title={title}
-              />
-              <CardContent className={classes.cardContent}>
-                <Typography variant="body2" color="textSecondary" component="p">
-                  {body}
-                </Typography>
-              </CardContent>
-            </CardActionArea>
-            <CardActions className={classes.cardActions} disableSpacing>
-              <IconButton aria-label="Site">
-                <LaunchIcon />
-              </IconButton>
-              <IconButton aria-label="GitHub">
-                <GitHubIcon />
-              </IconButton>
-            </CardActions>
-          </Card>
-        )
-      })}
+      <Typography variant="h5" style={{ "padding-top": "15px" }}>
+        Projects
+      </Typography>
+      <Grid container justify="space-evenly">
+        {projectsList.map(({ stack, title, body, links, imageUrl }) => {
+          return (
+            <Card className={classes.root}>
+              <CardActionArea>
+                <CardHeader
+                  className={classes.cardHeader}
+                  avatar={
+                    <Avatar
+                      aria-label="stack avatar"
+                      className={classes.avatar}
+                    >
+                      {stack}
+                    </Avatar>
+                  }
+                  title={title}
+                />
+                <CardContent className={classes.cardContent}>
+                  <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    component="p"
+                  >
+                    {body}
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
+              <CardActions className={classes.cardActions} disableSpacing>
+                <IconButton aria-label="Site">
+                  <LaunchIcon />
+                </IconButton>
+                <IconButton aria-label="GitHub">
+                  <GitHubIcon />
+                </IconButton>
+              </CardActions>
+            </Card>
+          )
+        })}
+      </Grid>
     </Layout>
   )
 }
 
-export default Index
+export default Home

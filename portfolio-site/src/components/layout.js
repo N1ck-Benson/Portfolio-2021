@@ -1,9 +1,11 @@
 import React from "react"
+import { Link } from "gatsby"
 import {
   AppBar,
   CssBaseline,
   Divider,
   Drawer,
+  Grid,
   Hidden,
   IconButton,
   List,
@@ -56,27 +58,48 @@ const useStyles = makeStyles(theme => ({
 const ResponsiveDrawer = props => {
   const { window, mobileOpen, handleDrawerToggle } = props
   const classes = useStyles()
-  // const theme = useTheme()
 
   // Contents of the drawer side-menu...
   const drawer = (
     <div>
-      <Typography variant="h6">Navigate</Typography>
+      <Typography variant="h6" className="MuiListItem-gutters">
+        Explore
+      </Typography>
       <Divider />
       <List>
-        {["Portfolio", "About", "Skills"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
+        {["Portfolio", "About", "Skills"].map((text, index) => {
+          const destination = index === 0 ? "/" : "/" + text.toLowerCase() + "/"
+          return (
+            <ListItem
+              button
+              component={Link}
+              to={destination}
+              key={`internalLink${index}`}
+            >
+              <ListItemText primary={text} />
+            </ListItem>
+          )
+        })}
       </List>
       <Divider />
       <List>
-        {["GitHub", "LinkedIn"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
+        {["GitHub", "LinkedIn"].map((text, index) => {
+          const destination = !index
+            ? "https://github.com/N1ck-Benson"
+            : "https://www.linkedin.com/in/nick-benson-b99a58137"
+          return (
+            <ListItem
+              button
+              component="a"
+              href={destination}
+              target="_blank"
+              rel="noopener"
+              key={`externalLink${index}`}
+            >
+              <ListItemText primary={text} />
+            </ListItem>
+          )
+        })}
       </List>
     </div>
   )
@@ -148,8 +171,13 @@ const Layout = ({ children }) => {
             <MenuIcon />
           </IconButton>
           <span>
-            <p style={{ margin: "5px 0 0 0" }}>nick benson</p>
-            <Typography variant="h6">Fullstack Developer</Typography>
+            {/* <p style={{ margin: "5px 0 0 0" }}>nick benson</p> */}
+            <Typography variant="body1" style={{ margin: "5px 0 0 0" }}>
+              nick benson
+            </Typography>
+            <Typography variant="h6" style={{ margin: "0 0 0 0" }}>
+              Fullstack Developer
+            </Typography>
           </span>
         </Toolbar>
       </AppBar>
