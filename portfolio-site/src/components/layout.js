@@ -11,11 +11,13 @@ import {
   List,
   ListItem,
   ListItemText,
+  ThemeProvider,
   Toolbar,
   Typography,
 } from "@material-ui/core"
 import MenuIcon from "@material-ui/icons/Menu"
 import { makeStyles } from "@material-ui/core/styles"
+import theme from "../theme"
 
 const drawerWidth = 240
 
@@ -34,6 +36,7 @@ const useStyles = makeStyles(theme => ({
       width: `calc(100% - ${drawerWidth}px)`,
       marginLeft: drawerWidth,
     },
+    backgroundColor: "#D90429",
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -49,6 +52,7 @@ const useStyles = makeStyles(theme => ({
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
+    backgroundColor: "#EDF2F4",
   },
 }))
 
@@ -157,40 +161,37 @@ const Layout = ({ children }) => {
   }
 
   return (
-    <div className={classes.root}>
-      <CssBaseline />
-      <AppBar position="fixed" className={classes.appBar}>
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            className={classes.menuButton}
-          >
-            <MenuIcon />
-          </IconButton>
-          <span>
-            {/* <p style={{ margin: "5px 0 0 0" }}>nick benson</p> */}
-            <Typography variant="body1" style={{ margin: "5px 0 0 0" }}>
-              nick benson
-            </Typography>
-            <Typography variant="h6" style={{ margin: "0 0 0 0" }}>
-              Fullstack Developer
-            </Typography>
-          </span>
-        </Toolbar>
-      </AppBar>
-      <ResponsiveDrawer
-        mobileOpen={mobileOpen}
-        handleDrawerToggle={handleDrawerToggle}
-      />
-      <main className={classes.content}>
-        {/* A div creates space above the main text for the fixed toolbar */}
-        <div className={classes.toolbar} />
-        {children}
-      </main>
-    </div>
+    <ThemeProvider theme={theme}>
+      <div className={classes.root}>
+        <CssBaseline />
+        <AppBar position="fixed" className={classes.appBar}>
+          <Toolbar>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              edge="start"
+              onClick={handleDrawerToggle}
+              className={classes.menuButton}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Grid container alignItems="baseline">
+              <Typography variant="h6">nick benson &nbsp;</Typography>
+              <Typography variant="h5">Fullstack Developer</Typography>
+            </Grid>
+          </Toolbar>
+        </AppBar>
+        <ResponsiveDrawer
+          mobileOpen={mobileOpen}
+          handleDrawerToggle={handleDrawerToggle}
+        />
+        <main className={classes.content}>
+          {/* A div creates space above the main text for the fixed toolbar */}
+          <div className={classes.toolbar} />
+          {children}
+        </main>
+      </div>
+    </ThemeProvider>
   )
 }
 

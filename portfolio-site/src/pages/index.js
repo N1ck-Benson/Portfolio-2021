@@ -50,14 +50,14 @@ const projectsList = [
     body:
       "My first fully-functioning backend project! An API serving news articles with nine useful endpoints. Soon to be expanded on frontend... Working in Node.js, Express, PSQL & Knex",
     links: {
-      gitHub: "https://github.com/N1ck-Benson/be-nc-news",
+      gitHub: "https://github.com/N1ck-Benson/backend-nc-news",
       site: "https://nc-news-database.herokuapp.com/api",
     },
     imageUrl: "../images/code-sample-1.png",
   },
   {
     stack: "F",
-    title: "Blurble",
+    title: "Blurble Mobile",
     body:
       "I worked in a team on this platform for hosting book clubs, using React Native. Blurble lets book clubs read together virtually, and lets readers build communities around books they love.",
     links: {
@@ -97,7 +97,7 @@ const Home = () => {
         </p>
       </div>
       <Divider />
-      <Typography variant="h5" style={{ "padding-top": "15px" }}>
+      <Typography variant="h5" style={{ padding: "15px" }}>
         Projects
       </Typography>
       <Grid container justify="space-evenly">
@@ -128,10 +128,22 @@ const Home = () => {
                 </CardContent>
               </CardActionArea>
               <CardActions className={classes.cardActions} disableSpacing>
-                <IconButton aria-label="Site">
+                <IconButton
+                  component="a"
+                  href={links.site}
+                  target="_blank"
+                  rel="noopener"
+                  aria-label="Site"
+                >
                   <LaunchIcon />
                 </IconButton>
-                <IconButton aria-label="GitHub">
+                <IconButton
+                  component="a"
+                  href={links.gitHub}
+                  target="_blank"
+                  rel="noopener"
+                  aria-label="GitHub"
+                >
                   <GitHubIcon />
                 </IconButton>
               </CardActions>
