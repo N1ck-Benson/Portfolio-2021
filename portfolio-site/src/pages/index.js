@@ -1,5 +1,6 @@
 import React from "react"
 import Layout from "../components/layout"
+import clsx from "clsx"
 import {
   Avatar,
   Divider,
@@ -14,6 +15,7 @@ import {
 } from "@material-ui/core"
 import GitHubIcon from "@material-ui/icons/GitHub"
 import LaunchIcon from "@material-ui/icons/Launch"
+import ArrowDropDownCircleTwoToneIcon from "@material-ui/icons/ArrowDropDownCircleTwoTone"
 import { makeStyles } from "@material-ui/core/styles"
 
 const useStyles = makeStyles(theme => ({
@@ -81,6 +83,8 @@ const projectsList = [
 
 const Home = () => {
   const classes = useStyles()
+  const [expanded, setExpanded] = React.useState(false)
+
   return (
     <Layout>
       <div className={classes.bio}>
@@ -102,6 +106,10 @@ const Home = () => {
       </Typography>
       <Grid container justify="space-evenly">
         {projectsList.map(({ stack, title, body, links, imageUrl }) => {
+          const handleExpandClick = () => {
+            setExpanded(!expanded)
+          }
+
           return (
             <Card className={classes.root}>
               <CardActionArea>
@@ -145,6 +153,16 @@ const Home = () => {
                   aria-label="GitHub"
                 >
                   <GitHubIcon />
+                </IconButton>
+                <IconButton
+                  className={clsx(classes.expand, {
+                    [classes.expandOpen]: expanded,
+                  })}
+                  onClick={handleExpandClick}
+                  aria-expanded={expanded}
+                  aria-label="show more"
+                >
+                  <ArrowDropDownCircleTwoToneIcon />
                 </IconButton>
               </CardActions>
             </Card>
