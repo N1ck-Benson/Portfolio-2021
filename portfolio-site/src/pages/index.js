@@ -44,6 +44,13 @@ const useStyles = makeStyles(() => ({
   cardContent: {
     "padding-bottom": "5px",
   },
+  skillIcons: {
+    margin: "0 15px 0 15px",
+  },
+  skillIcon: {
+    height: "50px",
+    padding: "5px",
+  },
 }))
 
 const Home = ({ data }) => {
@@ -70,6 +77,8 @@ const Home = ({ data }) => {
       </Typography>
       <Grid container justify="space-evenly">
         {data.allMarkdownRemark.edges.map(({ node }) => {
+          const icons = node.frontmatter.icons.split(",")
+          console.log(icons)
           return (
             <Card className={classes.root}>
               <CardActionArea>
@@ -85,6 +94,17 @@ const Home = ({ data }) => {
                   }
                   title={node.frontmatter.title}
                 />
+                <div className={classes.skillIcons}>
+                  {icons.map(iconUrl => {
+                    return (
+                      <img
+                        className={classes.skillIcon}
+                        src={iconUrl}
+                        alt="Skill"
+                      />
+                    )
+                  })}
+                </div>
                 <CardContent className={classes.cardContent}>
                   <Typography
                     variant="body2"
@@ -135,6 +155,7 @@ export const query = graphql`
             stack
             site
             gitHub
+            icons
           }
           rawMarkdownBody
         }
