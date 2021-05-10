@@ -18,7 +18,6 @@ import GitHubIcon from "@material-ui/icons/GitHub"
 import LaunchIcon from "@material-ui/icons/Launch"
 import { makeStyles } from "@material-ui/core/styles"
 import portfolioPic from "../images/portfolioPic.png"
-import projectsInfo from "../projects/info"
 
 const useStyles = makeStyles(() => ({
   bio: {
@@ -70,7 +69,7 @@ const Home = ({ data }) => {
         Projects
       </Typography>
       <Grid container justify="space-evenly">
-        {projectsInfo.map(({ stack, title, body, links, imageUrl }) => {
+        {data.allMarkdownRemark.edges.map(({ node }) => {
           return (
             <Card className={classes.root}>
               <CardActionArea>
@@ -81,10 +80,10 @@ const Home = ({ data }) => {
                       aria-label="stack avatar"
                       className={classes.avatar}
                     >
-                      {stack}
+                      {node.frontmatter.stack}
                     </Avatar>
                   }
-                  title={title}
+                  title={node.frontmatter.title}
                 />
                 <CardContent className={classes.cardContent}>
                   <Typography
@@ -92,14 +91,14 @@ const Home = ({ data }) => {
                     color="textSecondary"
                     component="p"
                   >
-                    {body}
+                    {node.rawMarkdownBody}
                   </Typography>
                 </CardContent>
               </CardActionArea>
               <CardActions className={classes.cardActions} disableSpacing>
                 <IconButton
                   component="a"
-                  href={links.site}
+                  href={node.frontmatter.site}
                   target="_blank"
                   rel="noopener"
                   aria-label="Site"
@@ -108,7 +107,7 @@ const Home = ({ data }) => {
                 </IconButton>
                 <IconButton
                   component="a"
-                  href={links.gitHub}
+                  href={node.frontmatter.gitHub}
                   target="_blank"
                   rel="noopener"
                   aria-label="GitHub"
@@ -131,7 +130,13 @@ export const query = graphql`
     allMarkdownRemark {
       edges {
         node {
-          html
+          frontmatter {
+            title
+            stack
+            site
+            gitHub
+          }
+          rawMarkdownBody
         }
       }
     }
