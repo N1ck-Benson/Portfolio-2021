@@ -83,7 +83,6 @@ const projectsList = [
 
 const Home = () => {
   const classes = useStyles()
-  const [expanded, setExpanded] = React.useState(false)
 
   return (
     <Layout>
@@ -106,10 +105,6 @@ const Home = () => {
       </Typography>
       <Grid container justify="space-evenly">
         {projectsList.map(({ stack, title, body, links, imageUrl }) => {
-          const handleExpandClick = () => {
-            setExpanded(!expanded)
-          }
-
           return (
             <Card className={classes.root}>
               <CardActionArea>
@@ -153,16 +148,6 @@ const Home = () => {
                   aria-label="GitHub"
                 >
                   <GitHubIcon />
-                </IconButton>
-                <IconButton
-                  className={clsx(classes.expand, {
-                    [classes.expandOpen]: expanded,
-                  })}
-                  onClick={handleExpandClick}
-                  aria-expanded={expanded}
-                  aria-label="show more"
-                >
-                  <ArrowDropDownCircleTwoToneIcon />
                 </IconButton>
               </CardActions>
             </Card>
