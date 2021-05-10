@@ -1,24 +1,26 @@
 import React from "react"
 import Layout from "../components/layout"
-import clsx from "clsx"
+import { graphql } from "gatsby"
+
 import {
   Avatar,
   Divider,
   IconButton,
   Card,
+  CardActions,
   CardActionArea,
   CardHeader,
   CardContent,
-  CardActions,
   Grid,
   Typography,
 } from "@material-ui/core"
 import GitHubIcon from "@material-ui/icons/GitHub"
 import LaunchIcon from "@material-ui/icons/Launch"
-import ArrowDropDownCircleTwoToneIcon from "@material-ui/icons/ArrowDropDownCircleTwoTone"
 import { makeStyles } from "@material-ui/core/styles"
+import portfolioPic from "../images/portfolioPic.png"
+import projectsInfo from "../projects/info"
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(() => ({
   bio: {
     display: "flex",
     "margin-top": 0,
@@ -45,43 +47,7 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-const projectsList = [
-  {
-    stack: "B",
-    title: "NC News API",
-    body:
-      "My first fully-functioning backend project! An API serving news articles with nine useful endpoints. Soon to be expanded on frontend... Working in Node.js, Express, PSQL & Knex",
-    links: {
-      gitHub: "https://github.com/N1ck-Benson/backend-nc-news",
-      site: "https://nc-news-database.herokuapp.com/api",
-    },
-    imageUrl: "../images/code-sample-1.png",
-  },
-  {
-    stack: "F",
-    title: "Blurble Mobile",
-    body:
-      "I worked in a team on this platform for hosting book clubs, using React Native. Blurble lets book clubs read together virtually, and lets readers build communities around books they love.",
-    links: {
-      gitHub: "https://github.com/N1ck-Benson/Blurble",
-      site: "...",
-    },
-    imageUrl: "../images/code-sample-2.webp",
-  },
-  {
-    stack: "F",
-    title: "Portfolio Site",
-    body:
-      "My portfolio is a space where I'm trying out tech like Gatsby, graphQL and Material-UI. See my progress on GitHub and in the Journal section below.",
-    links: {
-      gitHub: "https://github.com/N1ck-Benson/portfolio",
-      site: "",
-    },
-    imageUrl: "../images/code-sample-3.webp",
-  },
-]
-
-const Home = () => {
+const Home = ({ data }) => {
   const classes = useStyles()
 
   return (
@@ -89,7 +55,7 @@ const Home = () => {
       <div className={classes.bio}>
         <Avatar
           className={classes.avatar}
-          src="../images/portfolioPic.png"
+          src={portfolioPic}
           name="profile-pic"
           alt="Nick"
         />
@@ -104,7 +70,7 @@ const Home = () => {
         Projects
       </Typography>
       <Grid container justify="space-evenly">
-        {projectsList.map(({ stack, title, body, links, imageUrl }) => {
+        {projectsInfo.map(({ stack, title, body, links, imageUrl }) => {
           return (
             <Card className={classes.root}>
               <CardActionArea>
@@ -159,3 +125,15 @@ const Home = () => {
 }
 
 export default Home
+
+export const query = graphql`
+  query MyQuery {
+    allMarkdownRemark {
+      edges {
+        node {
+          html
+        }
+      }
+    }
+  }
+`
