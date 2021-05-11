@@ -22,21 +22,25 @@ import portfolioPic from "../images/portfolioPic.png"
 const useStyles = makeStyles(() => ({
   bio: {
     display: "flex",
-    "margin-top": 0,
+    alignItems: "center",
+    margin: "0 0 10px 0",
+    maxWidth: "40vw",
   },
   avatar: {
-    margin: "0 15px 15px 0",
+    margin: "10px 10px 10px 10px",
+  },
+  portfolioPic: {
+    margin: "10px 20px 10px 10px",
+    height: "100px",
+    width: "auto",
   },
   root: {
     maxWidth: 345,
     margin: "20px 0 20px 0",
   },
-  media: {
-    height: "50vh",
-    paddingTop: "56.25%", // 16:9
-  },
   cardHeader: {
-    "padding-bottom": 0,
+    padding: 0,
+    alignContent: "center",
   },
   cardActions: {
     padding: 0,
@@ -45,7 +49,9 @@ const useStyles = makeStyles(() => ({
     "padding-bottom": "5px",
   },
   skillIcons: {
-    margin: "0 15px 0 15px",
+    margin: "15px 15px 0 15px",
+    display: "flex",
+    alignContent: "center",
   },
   skillIcon: {
     height: "50px",
@@ -60,25 +66,27 @@ const Home = ({ data }) => {
     <Layout>
       <div className={classes.bio}>
         <Avatar
-          className={classes.avatar}
+          className={classes.portfolioPic}
           src={portfolioPic}
           name="profile-pic"
           alt="Nick"
         />
-        <p className={classes.bio}>
+        <p>
           Hi! I recently graduated from the fullstack developer bootcamp at
           Northcoders. Here you can find some of the projects that are keeping
           me busy.
         </p>
       </div>
       <Divider />
-      <Typography variant="h5" style={{ padding: "15px" }}>
-        Projects
-      </Typography>
+      <div className={classes.skillIcons}>
+        <Typography variant="h5" style={{ padding: "15px" }}>
+          Projects
+        </Typography>
+        <p className={"MuiTypography-colorTextSecondary"}>Frontend | Backend</p>
+      </div>
       <Grid container justify="space-evenly">
         {data.allMarkdownRemark.edges.map(({ node }) => {
           const icons = node.frontmatter.icons.split(",")
-          console.log(icons)
           return (
             <Card className={classes.root}>
               <CardActionArea>
@@ -94,6 +102,7 @@ const Home = ({ data }) => {
                   }
                   title={node.frontmatter.title}
                 />
+                <Divider />
                 <div className={classes.skillIcons}>
                   {icons.map(iconUrl => {
                     return (
@@ -146,8 +155,8 @@ const Home = ({ data }) => {
 export default Home
 
 export const query = graphql`
-  query MyQuery {
-    allMarkdownRemark {
+  query projectsQuery {
+    allMarkdownRemark(filter: { frontmatter: { title: { ne: "About" } } }) {
       edges {
         node {
           frontmatter {

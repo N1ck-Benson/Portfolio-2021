@@ -53,6 +53,7 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
     padding: theme.spacing(3),
     backgroundColor: "#EDF2F4",
+    color: "#2B2D42",
   },
 }))
 
@@ -71,7 +72,7 @@ const ResponsiveDrawer = props => {
       </Typography>
       <Divider />
       <List>
-        {["Portfolio", "About", "Skills"].map((text, index) => {
+        {["Projects", "About"].map((text, index) => {
           const destination = index === 0 ? "/" : "/" + text.toLowerCase() + "/"
           return (
             <ListItem
