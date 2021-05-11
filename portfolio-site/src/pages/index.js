@@ -99,6 +99,7 @@ const Home = ({ data }) => {
       </div>
       <Grid container justify="space-evenly" spacing={2}>
         {data.allMarkdownRemark.edges.map(({ node }) => {
+          const skills = node.frontmatter.skills.split(",")
           const icons = node.frontmatter.icons.split(",")
           return (
             <Grid item>
@@ -118,12 +119,13 @@ const Home = ({ data }) => {
                   />
                   <Divider />
                   <div className={classes.skillIcons}>
-                    {icons.map(iconUrl => {
+                    {icons.map((iconUrl, index) => {
                       return (
                         <img
                           className={classes.skillIcon}
                           src={iconUrl}
-                          alt="Skill"
+                          alt={skills[index]}
+                          title={skills[index]}
                         />
                       )
                     })}
@@ -177,8 +179,9 @@ export const query = graphql`
           frontmatter {
             title
             stack
-            site
             gitHub
+            site
+            skills
             icons
           }
           rawMarkdownBody

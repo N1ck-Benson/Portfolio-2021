@@ -3,6 +3,7 @@ title: Blurble Mobile App
 stack: "F"
 gitHub: "https://github.com/N1ck-Benson/Blurble"
 site: ""
+skills: "React Native, Expo, HTML5, CSS3"
 icons: "https://logos-download.com/wp-content/uploads/2016/09/React_logo_logotype_emblem.png, https://seeklogo.com/images/E/expo-logo-01BB2BCFC3-seeklogo.com.png, https://logos-download.com/wp-content/uploads/2017/07/HTML5_badge.png, https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/CSS.3.svg/1200px-CSS.3.svg.png"
 ---
 
