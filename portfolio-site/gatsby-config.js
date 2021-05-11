@@ -1,6 +1,20 @@
 module.exports = {
-  /* Your site config here */
+  flags: { PRESERVE_WEBPACK_CACHE: true },
   plugins: [
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `GatsbyJS`,
+        short_name: `GatsbyJS`,
+        start_url: `/`,
+        background_color: `#6b37bf`,
+        theme_color: `#6b37bf`,
+        // Enables "Add to Homescreen" prompt and disables browser UI (including back button)
+        // see https://developers.google.com/web/fundamentals/web-app-manifest/#display
+        display: `standalone`,
+        icon: `src/images/icon.png`,
+      },
+    },
     "gatsby-plugin-material-ui",
     {
       resolve: `gatsby-source-filesystem`,

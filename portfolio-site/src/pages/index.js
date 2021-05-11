@@ -41,7 +41,7 @@ const useStyles = makeStyles(theme => ({
     },
     margin: "10px 20px 10px 10px",
     height: "110px",
-    width: "auto",
+    width: "115px",
   },
   root: {
     maxWidth: 345,
