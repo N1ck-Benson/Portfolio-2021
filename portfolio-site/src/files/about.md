@@ -12,20 +12,16 @@ _You can take a look at the things I've been working on in the Projects page, wh
 
 ### Some of my skills...
 
-| **Backend** |            |                                   |     |
-| ----------- | ---------- | --------------------------------- | --- |
-|             | JavaScript | _Node.js, Express, Knex, Heroku_  |
-|             | SQL        | _postgreSQL for querying servers_ |
+| > Backend  |     |     |                                   |
+| :--------- | --- | --- | --------------------------------- |
+| JavaScript |     |     | _Node.js, Express, Knex, Heroku_  |
+| SQL        |     |     | _postgreSQL for querying servers_ |
 
-| **Frontend** |                             |                                                            |     |
-| ------------ | --------------------------- | ---------------------------------------------------------- | --- |
-|              | React, React Native, Gatsby | _mobile app development, portfolio site, smaller projects_ |
-|              | HTML5, CSS3                 | _flexbox and grid_                                         |
-|              | graphQL                     | _hydrating Gatsby sites with images and .md files_         |
-
----
-
----
+| > Frontend                  |     |     |                                                    |
+| :-------------------------- | --- | --- | -------------------------------------------------- |
+| React, React Native, Gatsby |     |     | _Node.js, Express, Knex, Heroku_                   |
+| HTML5, CSS3                 |     |     | _postgreSQL for querying servers_                  |
+| graphQL                     |     |     | _hydrating Gatsby sites with images and .md files_ |
 
 ### A bit about me...
 
