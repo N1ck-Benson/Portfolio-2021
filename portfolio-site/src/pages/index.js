@@ -61,7 +61,6 @@ const useStyles = makeStyles(theme => ({
     margin: "15px 15px 0 15px",
     display: "flex",
     alignContent: "center",
-    overflow: "scroll",
   },
   skillIcon: {
     height: "50px",
