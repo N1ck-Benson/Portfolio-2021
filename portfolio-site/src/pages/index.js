@@ -1,6 +1,7 @@
 import React from "react"
 import Layout from "../components/layout"
 import { graphql } from "gatsby"
+import htmlCssIcon from "../images/htmlCssIcon.png"
 
 import {
   Avatar,
@@ -43,6 +44,13 @@ const useStyles = makeStyles(theme => ({
     height: "110px",
     width: "115px",
   },
+  projectsHeader: {
+    display: "flex",
+    alignItems: "center",
+    "& span": {
+      marginBottom: "25px",
+    },
+  },
   root: {
     maxWidth: 345,
     margin: "20px 0 20px 0",
@@ -60,10 +68,11 @@ const useStyles = makeStyles(theme => ({
   skillIcons: {
     margin: "15px 15px 0 15px",
     display: "flex",
-    alignContent: "center",
+    alignContent: "space-evenly",
   },
   skillIcon: {
     height: "50px",
+    width: "auto",
     padding: "5px",
   },
 }))
@@ -91,18 +100,26 @@ const Home = ({ data }) => {
         </Grid>
       </Grid>
       <Divider />
-      <div className={classes.skillIcons}>
+      <header className={classes.projectsHeader}>
         <Typography variant="h5" style={{ padding: "15px" }}>
           Projects
         </Typography>
-        <p className={"MuiTypography-colorTextSecondary"}>Frontend | Backend</p>
-      </div>
-      <Grid container justify="space-evenly" spacing={2}>
+        <span className={"MuiTypography-colorTextSecondary"}>
+          Frontend | Backend
+        </span>
+      </header>
+      <Grid
+        container
+        justify="space-evenly"
+        spacing={2}
+        className={classes.skillIcons}
+      >
         {data.allMarkdownRemark.edges.map(({ node }) => {
           const skills = node.frontmatter.skills.split(",")
           const icons = node.frontmatter.icons.split(",")
+          const { stack, title, site, gitHub } = node.frontmatter
           return (
-            <Grid item>
+            <Grid item key={title}>
               <Card className={classes.root}>
                 <CardActionArea>
                   <CardHeader
@@ -112,10 +129,10 @@ const Home = ({ data }) => {
                         aria-label="stack avatar"
                         className={classes.avatar}
                       >
-                        {node.frontmatter.stack}
+                        {stack}
                       </Avatar>
                     }
-                    title={node.frontmatter.title}
+                    title={title}
                   />
                   <Divider />
                   <div className={classes.skillIcons}>
@@ -123,9 +140,12 @@ const Home = ({ data }) => {
                       return (
                         <img
                           className={classes.skillIcon}
-                          src={iconUrl}
+                          src={
+                            iconUrl !== " htmlCssIcon" ? iconUrl : htmlCssIcon
+                          }
                           alt={skills[index]}
                           title={skills[index]}
+                          key={`icon${index}`}
                         />
                       )
                     })}
@@ -143,21 +163,35 @@ const Home = ({ data }) => {
                 <CardActions className={classes.cardActions} disableSpacing>
                   <IconButton
                     component="a"
-                    href={node.frontmatter.site}
+                    href={site}
                     target="_blank"
                     rel="noopener"
                     aria-label="Site"
                   >
                     <LaunchIcon />
+                    <Typography
+                      variant="overline"
+                      color="textSecondary"
+                      component="p"
+                    >
+                      &nbsp; Site
+                    </Typography>
                   </IconButton>
                   <IconButton
                     component="a"
-                    href={node.frontmatter.gitHub}
+                    href={gitHub}
                     target="_blank"
                     rel="noopener"
                     aria-label="GitHub"
                   >
                     <GitHubIcon />
+                    <Typography
+                      variant="overline"
+                      color="textSecondary"
+                      component="p"
+                    >
+                      &nbsp; GitHub
+                    </Typography>
                   </IconButton>
                 </CardActions>
               </Card>
