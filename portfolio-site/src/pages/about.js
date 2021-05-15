@@ -4,10 +4,13 @@ import { graphql } from "gatsby"
 import { Divider, Grid, makeStyles } from "@material-ui/core"
 
 const useStyles = makeStyles(theme => ({
-  body: {
+  bodyText: {
     [theme.breakpoints.up("sm")]: {
       maxWidth: "60vw",
     },
+  },
+  bodyContainer: {
+    justifyContent: "center",
   },
 }))
 
@@ -17,11 +20,11 @@ const about = ({ data }) => {
   return (
     <Layout>
       <Divider />
-      <Grid container>
+      <Grid container className={classes.bodyContainer}>
         <Grid item>
           <div
             dangerouslySetInnerHTML={{ __html: body }}
-            className={classes.body}
+            className={classes.bodyText}
           />
         </Grid>
       </Grid>
