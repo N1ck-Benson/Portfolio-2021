@@ -44,6 +44,9 @@ const useStyles = makeStyles(theme => ({
       display: "none",
     },
   },
+  h5: {
+    width: "max-content",
+  },
   // necessary for content to be below app bar
   toolbar: theme.mixins.toolbar,
   drawerPaper: {
@@ -51,7 +54,7 @@ const useStyles = makeStyles(theme => ({
   },
   content: {
     flexGrow: 1,
-    padding: theme.spacing(3),
+    padding: "20px 10px",
     backgroundColor: "#EDF2F4",
     color: "#2B2D42",
   },
@@ -178,7 +181,9 @@ const Layout = ({ children }) => {
             </IconButton>
             <Grid container alignItems="baseline">
               <Typography variant="h6">nick benson &nbsp;</Typography>
-              <Typography variant="h5">Fullstack Developer</Typography>
+              <Typography variant="h5" className={classes.h5}>
+                Fullstack Developer
+              </Typography>
             </Grid>
           </Toolbar>
         </AppBar>

@@ -51,7 +51,7 @@ const useStyles = makeStyles(theme => ({
       marginBottom: "25px",
     },
   },
-  root: {
+  card: {
     maxWidth: 345,
     margin: "20px 0 20px 0",
   },
@@ -108,19 +108,14 @@ const Home = ({ data }) => {
           Frontend | Backend
         </span>
       </header>
-      <Grid
-        container
-        justify="space-evenly"
-        spacing={2}
-        className={classes.skillIcons}
-      >
+      <Grid container justify="space-evenly" spacing={2}>
         {data.allMarkdownRemark.edges.map(({ node }) => {
           const skills = node.frontmatter.skills.split(",")
           const icons = node.frontmatter.icons.split(",")
           const { stack, title, site, gitHub } = node.frontmatter
           return (
             <Grid item key={title}>
-              <Card className={classes.root}>
+              <Card className={classes.card}>
                 <CardActionArea>
                   <CardHeader
                     className={classes.cardHeader}
