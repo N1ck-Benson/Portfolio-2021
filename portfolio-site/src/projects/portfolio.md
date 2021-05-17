@@ -1,4 +1,5 @@
 ---
+directory: "projects"
 title: Portfolio Site
 stack: "F"
 gitHub: "https://github.com/N1ck-Benson/portfolio"

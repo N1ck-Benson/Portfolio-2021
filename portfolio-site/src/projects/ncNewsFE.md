@@ -1,4 +1,5 @@
 ---
+directory: "projects"
 title: NC News Webapp
 stack: "F"
 gitHub: "https://github.com/N1ck-Benson/fe-nc-news"

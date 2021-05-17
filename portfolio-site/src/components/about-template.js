@@ -1,6 +1,5 @@
 import React from "react"
-import Layout from "../components/layout"
-import { graphql } from "gatsby"
+import Layout from "./layout"
 import { Divider, Grid, makeStyles } from "@material-ui/core"
 
 const useStyles = makeStyles(theme => ({
@@ -14,9 +13,9 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-const about = ({ data }) => {
+const About = ({ pageContext }) => {
   const classes = useStyles
-  const body = data.markdownRemark.html
+  const { body } = pageContext
   return (
     <Layout>
       <Divider />
@@ -32,12 +31,4 @@ const about = ({ data }) => {
   )
 }
 
-export default about
-
-export const query = graphql`
-  query MyQuery {
-    markdownRemark(frontmatter: { title: { eq: "About" } }) {
-      html
-    }
-  }
-`
+export default About
