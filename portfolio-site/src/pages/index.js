@@ -202,7 +202,9 @@ export default Home
 
 export const query = graphql`
   query projectsQuery {
-    allMarkdownRemark(filter: { frontmatter: { title: { ne: "About" } } }) {
+    allMarkdownRemark(
+      filter: { frontmatter: { directory: { eq: "projects" } } }
+    ) {
       edges {
         node {
           frontmatter {

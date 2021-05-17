@@ -1,9 +1,7 @@
 ---
+directory: "files"
+slug: "/about"
 title: "About"
-stack: ""
-site: ""
-gitHub: ""
-icons: ""
 ---
 
 ## Hi, I'm Nick, welcome to my portfolio!

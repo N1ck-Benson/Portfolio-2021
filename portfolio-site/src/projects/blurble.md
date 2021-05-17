@@ -1,4 +1,5 @@
 ---
+directory: "projects"
 title: Blurble Mobile App
 stack: "F"
 gitHub: "https://github.com/N1ck-Benson/Blurble"

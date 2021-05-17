@@ -1,4 +1,5 @@
 ---
+directory: "projects"
 title: NC News API
 stack: "B"
 gitHub: "https://github.com/N1ck-Benson/backend-nc-news"
