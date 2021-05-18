@@ -1,3 +1,6 @@
+// Gatsby takes this component as a wrapper for all site pages.
+// Pages include index.js, and those dynamically
+// rendered by gatsby-node.js from .md files in the /files directory.
 import React from "react"
 import { Link } from "gatsby"
 import {
@@ -120,7 +123,6 @@ const ResponsiveDrawer = props => {
   return (
     <div>
       <nav className={classes.drawer} aria-label="Site navigation">
-        {/* The implementation of <Hidden> can be changed to js to avoid SEO duplication of links. */}
         {/* smUp -> temporary drawer and icon are hidden at or above 'small' screen-size */}
         <Hidden smUp implementation="css">
           <Drawer
@@ -192,7 +194,7 @@ const Layout = ({ children }) => {
           handleDrawerToggle={handleDrawerToggle}
         />
         <main className={classes.content}>
-          {/* A div creates space above the main text for the fixed toolbar */}
+          {/* A 'buffer' div is necessary for content to be start below the app bar */}
           <div className={classes.toolbar} />
           {children}
         </main>

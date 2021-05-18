@@ -1,3 +1,7 @@
+// All installed plugins must be added to config manually.
+// -> gatsby-source-filesystem enables graphql queries of the FS.
+// -> gatsby-transformer remark parses .md files into HTML.
+
 module.exports = {
   flags: { PRESERVE_WEBPACK_CACHE: true },
   plugins: [
