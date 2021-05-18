@@ -1,6 +1,9 @@
 exports.createPages = ({ graphql, actions }) => {
-  const { createPage } = actions
+  // The path module is imported for a path.resolve() below.
+  // path.resolve is a node.js method for resolving path segments
+  // to an absolute path.
   const localPath = require("path")
+  const { createPage } = actions
 
   return graphql(`
     query journalPages {

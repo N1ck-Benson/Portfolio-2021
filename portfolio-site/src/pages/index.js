@@ -2,7 +2,6 @@ import React from "react"
 import Layout from "../components/layout"
 import { graphql } from "gatsby"
 import htmlCssIcon from "../images/htmlCssIcon.png"
-
 import {
   Avatar,
   Divider,
@@ -77,6 +76,7 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
+// Gatsby passes data to Home from the graphql query below.
 const Home = ({ data }) => {
   const classes = useStyles()
 

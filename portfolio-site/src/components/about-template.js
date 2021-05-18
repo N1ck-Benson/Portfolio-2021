@@ -1,3 +1,6 @@
+// Template of the About page, which is generated dynamically
+// by gatsby-node.js from the about.md file in /files.
+
 import React from "react"
 import Layout from "./layout"
 import { Divider, Grid, makeStyles } from "@material-ui/core"
@@ -13,6 +16,8 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
+// pageContext is destructured from the context passed
+// to About by the createPage function in gatsby-node.js.
 const About = ({ pageContext }) => {
   const classes = useStyles
   const { body } = pageContext
