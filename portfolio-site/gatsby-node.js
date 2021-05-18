@@ -27,7 +27,7 @@ exports.createPages = ({ graphql, actions }) => {
       const { title, slug } = node.frontmatter
       const { html } = node
       const template =
-        slug === "about"
+        slug === "/about"
           ? localPath.resolve("src/components/about-template.js")
           : localPath.resolve("src/components/journal-template.js")
       createPage({
