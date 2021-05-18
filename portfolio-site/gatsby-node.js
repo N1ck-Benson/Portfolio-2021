@@ -12,7 +12,6 @@ exports.createPages = ({ graphql, actions }) => {
       ) {
         nodes {
           frontmatter {
-            title
             slug
           }
           html
@@ -33,7 +32,7 @@ exports.createPages = ({ graphql, actions }) => {
       createPage({
         path: slug,
         component: template,
-        context: { title: title, body: html },
+        context: { body: html },
       })
     })
   })
