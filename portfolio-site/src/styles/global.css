@@ -34,10 +34,6 @@ pre::-webkit-scrollbar {
   display: none;
 }
 
-/* Hide scrollbar for IE, Edge and Firefox */
-.example {
-}
-
 code {
   max-width: 100%;
 }
