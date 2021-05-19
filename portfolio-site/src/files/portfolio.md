@@ -1,7 +1,177 @@
 ---
 directory: "files"
 slug: "/journal/redesigning-my-portfolio"
-title: "Redesigning my portfolio"
 ---
 
-Hello world!
+# Redesigning my portfolio
+
+---
+
+When I decided to rebuild my portfolio site to make it more usable and engaging, the end-goal was to showcase my projects and learnings.
+
+As it turned out, the portfolio site has been a useful project in itself, and it gave me plenty of learnings! They've warranted a quick summing up...
+
+- [How it works]()
+  - [Rendering pages from markdown with Gatsby](redesigning-my-portfolio#Rendering-pages-from-markdown-with-Gatsby)
+  - [Using graphQL on the frontend](redesigning-my-portfolio#Using-graphQL-on-the-frontend)
+    - [_A simple query_](redesigning-my-portfolio#A-simple-query)
+    - [_Building pages from .md files_](redesigning-my-portfolio#Building-pages-from-md-files)
+
+## 🧰 &nbsp; How it works &nbsp;⚙️
+
+This site is built in React and hosted with Gatsby. I jettisoned the first attempt, built in good old HTML and CSS, after spending about seven weeks taking a deep dive into React and prefab component libraries.
+
+By that point I'd also surfed past Gatsby enough times to be curious about [graphQL]("https://graphql.org/) and rendering pages from markdown. In combination with the tools I've become used to, I've loved using it.
+
+### Rendering pages from markdown with Gatsby
+
+[Gatsby]("https://www.gatsbyjs.com/") is a frontend framework for structuring static websites, and was ideal for this project.
+
+Aside from being quick to deploy your changes, thanks to an edge cloud network, Gatsby uses graphQL and plugins to transform data from markdown files into html. You can then generate webpages from batches of similar files using a single template.
+
+In the [GitHub]("https://github.com/N1ck-Benson/portfolio") repository, you can see how this works.
+
+```
+📂 portfolio-site
+  📂 src
+    📂 components
+    📂 files
+    📂 pages
+    📂 projects
+  ...
+  gatsby-node.js
+```
+
+The /src directory is where Gatsby looks for assets. Within here, /pages contains the main React components that Gatsby picks up and renders as pages on the site. Links and routing are taken care of for you.
+
+The /files and /projects directories contain .md files for rendering as HTML, while /components is useful for wrappers or templates. Every page on the site has a Layout wrapper with a header and a nav.
+
+```js
+const Layout = ({ children }) => {
+  ...
+  return (
+    <ThemeProvider theme={theme}>
+      <div className={classes.root}>
+        <CssBaseline />
+        <AppBar position="fixed" className={classes.appBar}>
+            ...
+        </AppBar>
+        <ResponsiveDrawer
+          mobileOpen={mobileOpen}
+          handleDrawerToggle={handleDrawerToggle}
+        />
+        <main className={classes.content}>
+          <div className={classes.toolbar} />
+          {children}
+        </main>
+      </div>
+    </ThemeProvider>
+  )
+}
+```
+
+This code snippet shows Gatsby and React at work together. Gatsby looks for a Layout.js file and passes an object to it, which includes the key "children".
+
+The variable {children} which is wrapped in the main at the bottom of the component is destructured from that object and refers to any JSX that is wrapped in the Layout component. This wrapping is found on every page, and can of course be used in other wrapper components:
+
+```js
+// index.js
+const Home = ({ data }) => {
+  const classes = useStyles()
+
+  return (
+    <Layout>
+      Bio section...
+      <Grid container className={classes.bio}>
+        ...
+      </Grid>
+      <Divider />
+      Projects header...
+      <header className={classes.projectsHeader}>...</header>
+      Projects list...
+      <Grid container justify="space-evenly" spacing={2}>
+        ...
+      </Grid>
+    </Layout>
+  )
+}
+```
+
+```js
+// about-template.js
+const About = ({ pageContext }) => {
+  ...
+  return (
+    <Layout>
+      <Divider />
+      <Grid container className={classes.bodyContainer}>
+        <Grid item>
+          <div
+            dangerouslySetInnerHTML={{ __html: body }}
+            className={classes.bodyText}
+          />
+        </Grid>
+      </Grid>
+    </Layout>
+  )
+}
+```
+
+### Using graphQL on the frontend
+
+Learning some graphQL was one of the main attractions of using Gatsby. Having only used SQL and relational databases before (see my [NC News API]("https://github.com/N1ck-Benson/backend-nc-news")), I was excited by the flexibility and precision and graphQL's single requests and its GraphiQL query tool.
+
+This site uses graphQL queries in the /index.js and /gatsby-node.js files. Both of these use `gatsby-source-filesystem` to access the markdown files from other directories, and `gatsby-transformer-remark` to parse those files into HTML.
+
+### _A simple query_
+
+In index.js, rather than using the html, the cards which make up the projects list have been hydrated with the rawMarkdownBody generated by `gatsby-transformer-remark` and retrieved with this file's graphQL query.
+
+Here's a heavily-redacted snippet of the data being passed to the component:
+
+```js
+// index.js
+const Home = ({ data }) => {
+  return (
+    ...
+      {data.allMarkdownRemark.edges.map(({ node }) => {
+        ...
+        return (
+          <Grid item key={title}>
+          ...
+            <Card className={classes.card}>
+            ...
+            {node.rawMarkdownBody}
+            </Card>
+            ...
+          </Grid>
+        )
+      })}
+  )
+}
+
+export const query = graphql`
+  query projectsQuery {
+    allMarkdownRemark(
+      filter: { frontmatter: { directory: { eq: "projects" } } }
+    ) {
+      edges {
+        node {
+          ...
+          rawMarkdownBody
+        }
+      }
+    }
+  }
+`
+```
+
+When Gatsby finds the graphQL query in this file, it passes that query's result to the Home component, where `data` is destructured from it and put to work.
+
+### _Building pages from .md files_
+
+The /gatsby-node.js file is a little more sophisticated, using Gatsby's `createPages()` function to generate unique pages for each .md file in the /files directory.
+
+This last stage was tricky, and was arguably a little heavy-handed when I could have just rendered a single scrollable page with all the .md files rendered as blog-posts.
+
+But where's the fun in that? 😁

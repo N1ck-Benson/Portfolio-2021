@@ -12,7 +12,6 @@ exports.createPages = ({ graphql, actions }) => {
       ) {
         nodes {
           frontmatter {
-            title
             slug
           }
           html
@@ -24,16 +23,16 @@ exports.createPages = ({ graphql, actions }) => {
       throw result.errors
     }
     result.data.allMarkdownRemark.nodes.forEach(node => {
-      const { title, slug } = node.frontmatter
+      const { slug } = node.frontmatter
       const { html } = node
       const template =
-        slug === "about"
+        slug === "/about"
           ? localPath.resolve("src/components/about-template.js")
           : localPath.resolve("src/components/journal-template.js")
       createPage({
         path: slug,
         component: template,
-        context: { title: title, body: html },
+        context: { body: html },
       })
     })
   })

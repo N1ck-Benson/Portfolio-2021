@@ -2,6 +2,7 @@
 directory: "projects"
 title: NC News Webapp
 stack: "F"
+journal: ""
 gitHub: "https://github.com/N1ck-Benson/fe-nc-news"
 site: "https://nc-news-nb.netlify.app/"
 skills: "React, Jest, Netlify, HTML5 & CSS3, Blueprint.js,"

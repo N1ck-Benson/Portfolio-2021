@@ -2,6 +2,7 @@
 directory: "projects"
 title: Blurble Mobile App
 stack: "F"
+journal: ""
 gitHub: "https://github.com/N1ck-Benson/Blurble"
 site: "https://www.youtube.com/watch?v=wXuEF3AnYfM"
 skills: "React Native, Expo, HTML5 & CSS3"

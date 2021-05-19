@@ -1,6 +1,8 @@
 // All installed plugins must be added to config manually.
 // -> gatsby-source-filesystem enables graphql queries of the FS.
 // -> gatsby-transformer remark parses .md files into HTML.
+// -> gatsby-remark-autolink-headers adds links to html
+// headers from markdown (for linking with URI fragments).
 
 module.exports = {
   flags: { PRESERVE_WEBPACK_CACHE: true },
@@ -27,6 +29,19 @@ module.exports = {
         path: `${__dirname}/src/`,
       },
     },
-    "gatsby-transformer-remark",
+    {
+      resolve: "gatsby-transformer-remark",
+      options: {
+        plugins: [
+          {
+            resolve: "gatsby-remark-autolink-headers",
+            options: {
+              maintainCase: true,
+              elements: ["h2", "h3"],
+            },
+          },
+        ],
+      },
+    },
   ],
 }

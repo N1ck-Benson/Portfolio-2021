@@ -2,6 +2,7 @@
 directory: "projects"
 title: NC News API
 stack: "B"
+journal: ""
 gitHub: "https://github.com/N1ck-Benson/backend-nc-news"
 site: "https://nc-news-database.herokuapp.com/api"
 skills: "Node.js, postreSQL, express.js, Jest"

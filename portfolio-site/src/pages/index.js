@@ -16,6 +16,7 @@ import {
 } from "@material-ui/core"
 import GitHubIcon from "@material-ui/icons/GitHub"
 import LaunchIcon from "@material-ui/icons/Launch"
+import LibraryBooksIcon from "@material-ui/icons/LibraryBooks"
 import { makeStyles } from "@material-ui/core/styles"
 import portfolioPic from "../images/portfolioPic.png"
 
@@ -112,7 +113,7 @@ const Home = ({ data }) => {
         {data.allMarkdownRemark.edges.map(({ node }) => {
           const skills = node.frontmatter.skills.split(",")
           const icons = node.frontmatter.icons.split(",")
-          const { stack, title, site, gitHub } = node.frontmatter
+          const { stack, title, journal, site, gitHub } = node.frontmatter
           return (
             <Grid item key={title}>
               <Card className={classes.card}>
@@ -140,7 +141,7 @@ const Home = ({ data }) => {
                           }
                           alt={skills[index]}
                           title={skills[index]}
-                          key={`icon${index}`}
+                          key={`icon`}
                         />
                       )
                     })}
@@ -188,6 +189,24 @@ const Home = ({ data }) => {
                       &nbsp; GitHub
                     </Typography>
                   </IconButton>
+                  {journal ? (
+                    <IconButton
+                      component="a"
+                      href={journal}
+                      aria-label="Journal Page"
+                    >
+                      <LibraryBooksIcon />
+                      <Typography
+                        variant="overline"
+                        color="textSecondary"
+                        component="p"
+                      >
+                        &nbsp; Journal
+                      </Typography>
+                    </IconButton>
+                  ) : (
+                    ""
+                  )}
                 </CardActions>
               </Card>
             </Grid>
@@ -210,6 +229,7 @@ export const query = graphql`
           frontmatter {
             title
             stack
+            journal
             gitHub
             site
             skills

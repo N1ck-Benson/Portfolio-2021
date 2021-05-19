@@ -1,0 +1,36 @@
+/* 
+- Global styles are set here for html elements which
+are not affected by the Material-UI built-in
+styles, or which need to override them.
+- Some named classes have been set in here as well,
+to avoid the use of Material-UI's makeStyles() method
+in places where it would only apply one or two styles.
+*/
+
+table {
+  background-color: white;
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.journalIntro {
+  padding: 7.5px;
+  margin-top: 10px;
+}
+
+pre {
+  background-color: white;
+  border-radius: 10px;
+  font-size: 0.75em;
+  padding: 5px;
+  overflow: scroll;
+}
+
+code {
+  max-width: 100%;
+}
+
+.bodyText {
+  max-width: 95vw;
+  padding: 10px;
+}

@@ -2,6 +2,7 @@
 directory: "projects"
 title: Portfolio Site
 stack: "F"
+journal: "/journal/redesigning-my-portfolio"
 gitHub: "https://github.com/N1ck-Benson/portfolio"
 site: "https://nickbensonportfolio.gatsbyjs.io/"
 skills: "React.js, Gatsby, graphQL, Material UI, HTML5 & CSS3"
