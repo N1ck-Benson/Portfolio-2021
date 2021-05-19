@@ -3,45 +3,31 @@
 
 import React from "react"
 import Layout from "./layout"
-import { Divider, Grid, makeStyles, Typography } from "@material-ui/core"
-
-const useStyles = makeStyles(theme => ({
-  bodyText: {
-    [theme.breakpoints.up("sm")]: {
-      maxWidth: "60vw",
-    },
-  },
-  bodyContainer: {
-    justifyContent: "center",
-    minWidth: "80vw",
-  },
-}))
+import { Grid, Paper, Typography } from "@material-ui/core"
+import "../styles/global.css"
 
 // pageContext is destructured from the context passed
 // to each Journal page by the createPage function in
 // gatsby-node.js.
 const JournalTemplate = ({ pageContext }) => {
-  const classes = useStyles
   const { body } = pageContext
   return (
     <Layout>
-      <Divider />
-      <Grid container className={classes.bodyContainer}>
+      <Grid container>
         <Grid item>
-          <Typography variant="body1" className={classes.bodyText}>
-            Welcome to my Journal pages. This is where I provide some brief
-            commentary on the projects in my portfolio. Rather than being
-            instructional, it's a quick way to look under the hood without
-            needing to dive into the code on GitHub. But please do that as well!
-            Below are some links to my other Journal pages.
-          </Typography>
-          <Divider />
+          <Paper className="journalIntro">
+            <Typography variant="body2">
+              Welcome to my Journal pages, where you can more information about
+              my projects.
+            </Typography>
+            <Typography variant="body2">
+              It's a quick way to look under the hood before you dive into the
+              code on GitHub.
+            </Typography>
+          </Paper>
         </Grid>
-        <Grid item>
-          <div
-            dangerouslySetInnerHTML={{ __html: body }}
-            className={classes.bodyText}
-          />
+        <Grid item className="bodyText">
+          <div dangerouslySetInnerHTML={{ __html: body }} />
         </Grid>
       </Grid>
     </Layout>

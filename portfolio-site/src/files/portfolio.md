@@ -72,7 +72,7 @@ const Layout = ({ children }) => {
 
 This code snippet shows Gatsby and React at work together. Gatsby looks for a Layout.js file and passes an object to it, which includes the key "children".
 
-The variable `{children}` which is wrapped in the main at the bottom of the component is destructured from that object and refers to any JSX that is wrapped in the Layout component. This wrapping is found on every page, and can of course be used in other wrapper components:
+The variable {children} which is wrapped in the main at the bottom of the component is destructured from that object and refers to any JSX that is wrapped in the Layout component. This wrapping is found on every page, and can of course be used in other wrapper components:
 
 ```js
 // index.js

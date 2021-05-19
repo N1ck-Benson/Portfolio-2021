@@ -23,7 +23,7 @@ exports.createPages = ({ graphql, actions }) => {
       throw result.errors
     }
     result.data.allMarkdownRemark.nodes.forEach(node => {
-      const { title, slug } = node.frontmatter
+      const { slug } = node.frontmatter
       const { html } = node
       const template =
         slug === "/about"
