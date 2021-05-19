@@ -14,7 +14,7 @@ table {
 }
 
 .journalIntro {
-  padding: 7.5px;
+  padding: 10px 15px;
   margin-top: 10px;
 }
 
@@ -33,4 +33,10 @@ code {
 .bodyText {
   max-width: 95vw;
   padding: 10px;
+}
+
+@media only screen and (min-width: 1024px) {
+  .bodyText {
+    max-width: 60vw;
+  }
 }

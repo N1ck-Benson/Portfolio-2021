@@ -11,7 +11,7 @@ const About = ({ pageContext }) => {
   const { body } = pageContext
   return (
     <Layout>
-      <Grid container>
+      <Grid container justify="center">
         <Grid item className="bodyText">
           <div dangerouslySetInnerHTML={{ __html: body }} />
         </Grid>
