@@ -79,8 +79,15 @@ const ResponsiveDrawer = props => {
       </Typography>
       <Divider />
       <List>
-        {["Projects", "About"].map((text, index) => {
-          const destination = index === 0 ? "/" : "/" + text.toLowerCase() + "/"
+        {["Projects", "About", "Journal"].map((text, index) => {
+          let destination = "/"
+
+          if (index === 1) {
+            destination += text.toLowerCase() + "/"
+          } else if (index === 2) {
+            destination += text.toLowerCase() + "/redesigning-my-portfolio"
+          }
+
           return (
             <ListItem
               button
