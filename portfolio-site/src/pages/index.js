@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import Layout from "../components/layout"
 import { graphql } from "gatsby"
 import htmlCssIcon from "../images/htmlCssIcon.png"
@@ -13,6 +13,7 @@ import {
   CardContent,
   Grid,
   Typography,
+  Collapse,
 } from "@material-ui/core"
 import GitHubIcon from "@material-ui/icons/GitHub"
 import LaunchIcon from "@material-ui/icons/Launch"
@@ -80,7 +81,7 @@ const useStyles = makeStyles(theme => ({
 // Gatsby passes data to Home from the graphql query below.
 const Home = ({ data }) => {
   const classes = useStyles()
-
+  const [expand, setExpand] = useState(null)
   return (
     <Layout>
       <Grid container className={classes.bio}>
@@ -110,13 +111,20 @@ const Home = ({ data }) => {
         </span>
       </header>
       <Grid container justify="space-evenly" spacing={2}>
-        {data.allMarkdownRemark.edges.map(({ node }) => {
+        {data.allMarkdownRemark.edges.map((edge, index) => {
+          const { node } = edge
           const skills = node.frontmatter.skills.split(",")
           const icons = node.frontmatter.icons.split(",")
           const { stack, title, journal, site, gitHub } = node.frontmatter
           return (
             <Grid item key={title}>
-              <Card className={classes.card}>
+              <Card
+                className={classes.card}
+                onClick={() => {
+                  if (expand === null) setExpand(index)
+                  else setExpand(null)
+                }}
+              >
                 <CardActionArea>
                   <CardHeader
                     className={classes.cardHeader}
@@ -141,7 +149,7 @@ const Home = ({ data }) => {
                           }
                           alt={skills[index]}
                           title={skills[index]}
-                          key={`icon`}
+                          key={`skills-${index}`}
                         />
                       )
                     })}
@@ -208,6 +216,11 @@ const Home = ({ data }) => {
                     ""
                   )}
                 </CardActions>
+                <Collapse in={expand === index ? true : false}>
+                  <figure>
+                    <img alt="screenshot"></img>
+                  </figure>
+                </Collapse>
               </Card>
             </Grid>
           )
