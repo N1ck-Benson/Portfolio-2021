@@ -76,6 +76,16 @@ const useStyles = makeStyles(theme => ({
     width: "auto",
     padding: "5px",
   },
+  collapse: {
+    margin: "0",
+    display: "flex",
+    justifyContent: "center",
+    height: "min-content",
+  },
+  screenshot: {
+    maxWidth: "350px",
+    padding: "10px",
+  },
 }))
 
 // Gatsby passes data to Home from the graphql query below.
@@ -115,7 +125,14 @@ const Home = ({ data }) => {
           const { node } = edge
           const skills = node.frontmatter.skills.split(",")
           const icons = node.frontmatter.icons.split(",")
-          const { stack, title, journal, site, gitHub } = node.frontmatter
+          const {
+            stack,
+            title,
+            journal,
+            site,
+            gitHub,
+            image,
+          } = node.frontmatter
           return (
             <Grid item key={title}>
               <Card
@@ -216,9 +233,17 @@ const Home = ({ data }) => {
                     ""
                   )}
                 </CardActions>
-                <Collapse in={expand === index ? true : false}>
+                <Collapse
+                  in={expand === index ? true : false}
+                  className={classes.collapse}
+                >
+                  <Divider />
                   <figure>
-                    <img alt="screenshot"></img>
+                    <img
+                      className={classes.screenshot}
+                      src={image}
+                      alt="screenshot"
+                    />
                   </figure>
                 </Collapse>
               </Card>
@@ -247,6 +272,7 @@ export const query = graphql`
             site
             skills
             icons
+            image
           }
           rawMarkdownBody
         }
