@@ -235,6 +235,9 @@ const Home = ({ data }) => {
                 </CardActions>
                 <Collapse
                   in={expand === index ? true : false}
+                  timeout="auto"
+                  // unmountOnExit removes Collapse from the DOM when 'in' is false
+                  unmountOnExit
                   className={classes.collapse}
                 >
                   <Divider />
