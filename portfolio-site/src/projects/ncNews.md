@@ -1,5 +1,6 @@
 ---
 directory: "projects"
+position: 4
 title: NC News API
 stack: "B"
 journal: ""

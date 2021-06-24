@@ -1,5 +1,6 @@
 ---
 directory: "projects"
+position: 5
 title: Portfolio Site
 stack: "F"
 journal: "/journal/redesigning-my-portfolio"

@@ -1,5 +1,6 @@
 ---
 directory: "projects"
+position: 2
 title: Blurble Mobile App
 stack: "F"
 journal: ""

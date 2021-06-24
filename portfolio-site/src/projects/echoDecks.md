@@ -1,6 +1,7 @@
 ---
 directory: "projects"
-title: echoDecks
+position: 1
+title: echoDecks    💫 NEWEST PROJECT! ✨
 stack: "F/B"
 journal: ""
 gitHub: "https://github.com/N1ck-Benson/echoDecks"

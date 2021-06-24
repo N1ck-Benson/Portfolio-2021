@@ -92,6 +92,7 @@ const useStyles = makeStyles(theme => ({
 const Home = ({ data }) => {
   const classes = useStyles()
   const [expand, setExpand] = useState(null)
+
   return (
     <Layout>
       <Grid container className={classes.bio}>
@@ -117,7 +118,7 @@ const Home = ({ data }) => {
           Projects
         </Typography>
         <span className={"MuiTypography-colorTextSecondary"}>
-          Frontend | Backend
+          Frontend | Backend | Fullstack
         </span>
       </header>
       <Grid container justify="space-evenly" spacing={2}>
@@ -264,6 +265,7 @@ export const query = graphql`
   query projectsQuery {
     allMarkdownRemark(
       filter: { frontmatter: { directory: { eq: "projects" } } }
+      sort: { fields: frontmatter___position, order: ASC }
     ) {
       edges {
         node {
