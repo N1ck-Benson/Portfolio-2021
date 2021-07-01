@@ -183,22 +183,27 @@ const Home = ({ data }) => {
                   </CardContent>
                 </CardActionArea>
                 <CardActions className={classes.cardActions} disableSpacing>
-                  <IconButton
-                    component="a"
-                    href={site}
-                    target="_blank"
-                    rel="noopener"
-                    aria-label="Site"
-                  >
-                    <LaunchIcon />
-                    <Typography
-                      variant="overline"
-                      color="textSecondary"
-                      component="p"
+                  {site ? (
+                    <IconButton
+                      component="a"
+                      href={site}
+                      target="_blank"
+                      rel="noopener"
+                      aria-label="Site"
                     >
-                      &nbsp; Site
-                    </Typography>
-                  </IconButton>
+                      <LaunchIcon />
+                      <Typography
+                        variant="overline"
+                        color="textSecondary"
+                        component="p"
+                      >
+                        &nbsp;
+                        {site.includes("www.youtube.com") ? "Demo" : "Site"}
+                      </Typography>
+                    </IconButton>
+                  ) : (
+                    ""
+                  )}
                   <IconButton
                     component="a"
                     href={gitHub}
